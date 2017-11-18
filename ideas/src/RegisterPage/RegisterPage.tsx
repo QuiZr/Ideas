@@ -57,16 +57,17 @@ class RegisterPage extends React.Component<{}, { email: string; password: string
         <div style={{ margin: 'auto' }}>
           <div>
             <input
+              className="form-control"
               type="text"
-              placeholder="email"
+              placeholder="Email"
               onChange={this.handleChange}
               value={this.state.email}
               name="email"
             />
-            <br />
             <input
+              className="form-control"
               type="password"
-              placeholder="password"
+              placeholder="Password"
               onChange={this.handleChange}
               value={this.state.password}
               name="password"
@@ -74,18 +75,19 @@ class RegisterPage extends React.Component<{}, { email: string; password: string
           </div>
           <br />
           <div style={{ margin: 'auto' }} className="text-center">
+
             <button className="btn btn-block btn-success" onClick={this.login}>
               Zaloguj się
             </button>
-            <button className="btn btn-block btn-error" onClick={this.register}>
+            <button className="btn btn-block btn-default" onClick={this.register}>
               Zarejestruj się
             </button>
-            <button className="btn btn-block btn-primary">
-              Kontynuuj przez FB
-            </button>
-            <button className="btn btn-block btn-warning">
-              Kontynuuj przez Google
-            </button>
+            <a className="btn btn-block btn-social btn-facebook">
+              <span className="fa fa-facebook"></span>&nbsp;&nbsp;&nbsp;&nbsp;Kontynuuj z FB
+            </a>
+            <a className="btn btn-block btn-social btn-google">
+              <span className="fa fa-google"></span>&nbsp;&nbsp;&nbsp;&nbsp;Kontynuuj z Google
+            </a>
           </div>
         </div>
       </div>
