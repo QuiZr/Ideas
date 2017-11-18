@@ -9,7 +9,7 @@ class LandingPage extends React.Component {
           <h1 className="text-center">IDEAS</h1>
           <textarea
             className="form-control"
-            id="comment"
+            id="title"
             rows={3}
             cols={30}
             style={{ overflow: 'hidden' }}
@@ -17,12 +17,12 @@ class LandingPage extends React.Component {
           />
           <br />
           <div className="btn-group btn-block btn-toggle">
-            <button id="idea" onClick={() => toggle()} className="btn btn-default">Pomysł</button>
-            <button id="problem" onClick={() => toggle()} className="btn btn-primary active">Problem</button>
+            <button id="idea" onClick={toggle} className="btn btn-default">Pomysł</button>
+            <button id="problem" onClick={toggle} className="btn btn-primary active">Problem</button>
           </div>
           <br />
           <br />
-          <button className="btn btn-block btn-primary">Start</button>
+          <button onClick={submit} className="btn btn-block btn-primary">Start</button>
         </div>
       </div>
     );
@@ -50,6 +50,15 @@ function toggle() {
     idea.classList.remove('active');
     idea.classList.add('btn-default');
   }
+}
+
+function submit() {
+  let title = document.getElementById('title') as HTMLInputElement;
+  let problem = document.getElementById('problem');
+  if (title == null || problem == null) {
+    return;
+  }
+  alert('leco dane leco: ' + title.value + ' ' + problem.classList.contains('active'));
 }
 
 export default LandingPage;
