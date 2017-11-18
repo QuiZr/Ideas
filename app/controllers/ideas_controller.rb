@@ -31,6 +31,18 @@ class IdeasController < ApplicationController
     head :no_content
   end
 
+  # POST /todos/:id/like
+  def like
+    Like.create(idea_id: params[:idea_id], user_id: current_user.id)
+    json_response(@idea)
+  end
+
+  # POST /todos/:id/unlike
+  def unlike
+    Like.where(idea_id: params[:idea_id]).where(user_id: current_user.id)
+    json_response(@idea)
+  end
+
   private
 
   def idea_params

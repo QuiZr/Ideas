@@ -24,6 +24,7 @@ gem 'omniauth'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 2.7.2'
 gem 'jquery-rails'
+gem 'rack-cors'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
