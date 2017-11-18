@@ -33,12 +33,14 @@ class IdeasController < ApplicationController
 
   # POST /todos/:id/like
   def like
-    Like.create(idea_id: params[:idea_id], user_id: current_user.id)
+    @idea = Idea.find(params[:idea_id])
+    Like.create(idea_id: @idea.id, user_id: current_user.id)
     json_response(@idea)
   end
 
   # POST /todos/:id/unlike
   def unlike
+    @idea = Idea.find(params[:idea_id])
     Like.where(idea_id: params[:idea_id]).where(user_id: current_user.id)
     json_response(@idea)
   end

@@ -56,6 +56,9 @@ Rails.application.routes.draw do
 
   resources :ideas do
     post 'like'
+    post 'unlike'
     resources :comments
   end
+
+  resources :technologies
 end
