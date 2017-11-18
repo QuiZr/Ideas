@@ -15,7 +15,7 @@ class RegisterPage extends React.Component<{}, { email: string; password: string
     const headers = new Headers();
     headers.append('Accept', 'application/json');
     headers.append('Content-Type', 'application/json');
-    fetch('http://' + process.env.REACT_APP_API_HOST + ':3000/auth/', {
+    fetch('http://' + process.env.REACT_APP_API_HOST + ':3000/auth/sign_in', {
       method: 'post',
       headers: headers,
       body: JSON.stringify({
@@ -23,6 +23,10 @@ class RegisterPage extends React.Component<{}, { email: string; password: string
         password: this.state.password,
         password_confirmation: this.state.password
       })
+    }).then((r) => {
+      localStorage.setItem('access-token', r.headers.get('access-token') as string);
+      localStorage.setItem('client', r.headers.get('client') as string);
+      localStorage.setItem('uid', r.headers.get('uid') as string);      
     }).then(() => window.location.href = '/');
   }
 
@@ -38,7 +42,7 @@ class RegisterPage extends React.Component<{}, { email: string; password: string
         password: this.state.password,
         password_confirmation: this.state.password
       })
-    }).then(() => window.location.href = '/');
+    }).then(() => this.login);
   }
 
   handleChange(event: /* tslint:disable */ any /* tslint:enable */) {
