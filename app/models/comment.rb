@@ -1,18 +1,16 @@
 # == Schema Information
 #
-# Table name: ideas
+# Table name: comments
 #
 #  id         :integer          not null, primary key
-#  title      :string
-#  desc_short :text
-#  desc_long  :text
+#  body       :text
+#  idea_id    :integer
 #  user_id    :integer
-#  status     :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
 
-class Idea < ApplicationRecord
-  belongs_to :user, optional: true
-  has_many :comments
+class Comment < ApplicationRecord
+  belongs_to :idea
+  belongs_to :user
 end

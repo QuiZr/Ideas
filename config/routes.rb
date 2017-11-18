@@ -26,6 +26,12 @@
 #         omniauth_failure GET|POST /omniauth/failure(.:format)            devise_token_auth/omniauth_callbacks#omniauth_failure
 #                          GET      /auth/:provider(.:format)              redirect(301)
 #        letter_opener_web          /letter_opener                         LetterOpenerWeb::Engine
+#            idea_comments GET      /ideas/:idea_id/comments(.:format)     comments#index
+#                          POST     /ideas/:idea_id/comments(.:format)     comments#create
+#             idea_comment GET      /ideas/:idea_id/comments/:id(.:format) comments#show
+#                          PATCH    /ideas/:idea_id/comments/:id(.:format) comments#update
+#                          PUT      /ideas/:idea_id/comments/:id(.:format) comments#update
+#                          DELETE   /ideas/:idea_id/comments/:id(.:format) comments#destroy
 #                    ideas GET      /ideas(.:format)                       ideas#index
 #                          POST     /ideas(.:format)                       ideas#create
 #                     idea GET      /ideas/:id(.:format)                   ideas#show
@@ -48,5 +54,7 @@ Rails.application.routes.draw do
     mount LetterOpenerWeb::Engine, at: "/letter_opener"
   end
 
-  resources :ideas
+  resources :ideas do
+    resources :comments
+  end
 end

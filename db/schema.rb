@@ -10,10 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171118153737) do
+ActiveRecord::Schema.define(version: 20171118171820) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "comments", force: :cascade do |t|
+    t.text "body"
+    t.bigint "idea_id"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["idea_id"], name: "index_comments_on_idea_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
+  end
 
   create_table "ideas", force: :cascade do |t|
     t.string "title"
@@ -24,6 +34,27 @@ ActiveRecord::Schema.define(version: 20171118153737) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_ideas_on_user_id"
+  end
+
+  create_table "likes", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "idea_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["idea_id"], name: "index_likes_on_idea_id"
+    t.index ["user_id"], name: "index_likes_on_user_id"
+  end
+
+  create_table "tags", force: :cascade do |t|
+    t.string "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "technologies", force: :cascade do |t|
+    t.string "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -55,5 +86,9 @@ ActiveRecord::Schema.define(version: 20171118153737) do
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
+  add_foreign_key "comments", "ideas"
+  add_foreign_key "comments", "users"
   add_foreign_key "ideas", "users"
+  add_foreign_key "likes", "ideas"
+  add_foreign_key "likes", "users"
 end
