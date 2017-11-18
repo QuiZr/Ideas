@@ -1,5 +1,6 @@
 import * as React from 'react';
 import './LandingPage.css';
+import { Link } from 'react-router-dom';
 
 class LandingPage extends React.Component {
   render() {
@@ -22,7 +23,13 @@ class LandingPage extends React.Component {
           </div>
           <br />
           <br />
-          <button onClick={submit} className="btn btn-block btn-primary">Start</button>
+          <button onClick={submit} className="btn btn-block btn-primary">Starts</button>
+          <br />
+          <div className="pull-left"><Link to="/register">Register</Link></div>
+          <div className="pull-right"><Link to="/login">Login</Link></div>
+        </div>
+        <div id="loaderModal" style={{ display: 'none' }}>
+          <div className="loader" style={{ margin: 'auto' }}/>
         </div>
       </div>
     );
@@ -35,30 +42,23 @@ function toggle() {
   if (idea == null || problem == null) {
     return;
   }
-  if (idea.classList.contains('btn-default')) {
-    idea.classList.add('btn-primary');
-    idea.classList.add('active');
-    idea.classList.remove('btn-default');
-    problem.classList.remove('btn-primary');
-    problem.classList.remove('active');
-    problem.classList.add('btn-default');
-  } else {
-    problem.classList.add('btn-primary');
-    problem.classList.add('active');
-    problem.classList.remove('btn-default');
-    idea.classList.remove('btn-primary');
-    idea.classList.remove('active');
-    idea.classList.add('btn-default');
-  }
+  idea.classList.toggle('btn-primary');
+  idea.classList.toggle('active');
+  idea.classList.toggle('btn-default');
+  problem.classList.toggle('btn-primary');
+  problem.classList.toggle('active');
+  problem.classList.toggle('btn-default');
 }
 
 function submit() {
   let title = document.getElementById('title') as HTMLInputElement;
   let problem = document.getElementById('problem');
-  if (title == null || problem == null) {
+  let loader = document.getElementById('loaderModal');
+  if (title == null || problem == null || loader == null) {
     return;
   }
-  alert('leco dane leco: ' + title.value + ' ' + problem.classList.contains('active'));
+  loader.style.display = 'flex';
+  // alert('leco dane leco: ' + title.value + ' ' + problem.classList.contains('active'));
 }
 
 export default LandingPage;
