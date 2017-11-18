@@ -4,17 +4,17 @@ import {
   Route
 } from 'react-router-dom';
 import './App.css';
-import LandingPage from './LandingPage/LandingPage';
 
+import LandingPage from './LandingPage/LandingPage';
 import RegisterPage from './RegisterPage/RegisterPage';
 
 class App extends React.Component {
   render() {
     return (
       <Router>
-          <Route exact={true} path="/register" component={RegisterPage} />
-        <div className="text-center">
+        <div>
           <Route exact={true} path="/" component={LandingPage} />
+          <Route exact={true} path="/register" component={RegisterPage} />          
         </div>
       </Router>
     );
