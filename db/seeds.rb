@@ -5,3 +5,20 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+5.times do |i|
+  User.create(email: "admin#{i}@example.com", password: "12345678", password_confirmation: "12345678")
+end
+
+10.times do |i|
+  Tag.create(title: Faker::Lorem.word)
+end
+
+10.times do |i|
+  Technology.create(title: Faker::Lorem.word)
+end
+
+5.times do |i|
+  @idea = Idea.create(title: Faker::Book.title, desc_short: Faker::Lorem.sentence, desc_long: Faker::Lorem.paragraph, user_id: i+1)
+  Comment.create(idea_id: @idea.id, body: Faker::Lorem.sentence, user_id: i+1)
+end
