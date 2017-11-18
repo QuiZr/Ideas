@@ -45,6 +45,21 @@ class IdeasController < ApplicationController
     json_response(@idea)
   end
 
+  # POST /ideas/:id/add_tag
+  def add_tag
+    @idea = Idea.find(params[:idea_id])
+    @idea.tags << Tag.find(params[:tag_id])
+    @idea.save
+    json_response(@idea.tags)
+  end
+
+  def remove_tag
+    @idea = Idea.find(params[:idea_id])
+    @idea.tags.delete(Tag.find(params[:tag_id]))
+    @idea.save
+    json_response(@idea.tags)
+  end
+
   private
 
   def idea_params

@@ -26,6 +26,10 @@
 #         omniauth_failure GET|POST /omniauth/failure(.:format)            devise_token_auth/omniauth_callbacks#omniauth_failure
 #                          GET      /auth/:provider(.:format)              redirect(301)
 #        letter_opener_web          /letter_opener                         LetterOpenerWeb::Engine
+#                idea_like POST     /ideas/:idea_id/like(.:format)         ideas#like
+#              idea_unlike POST     /ideas/:idea_id/unlike(.:format)       ideas#unlike
+#             idea_add_tag POST     /ideas/:idea_id/add_tag(.:format)      ideas#add_tag
+#          idea_remove_tag POST     /ideas/:idea_id/remove_tag(.:format)   ideas#remove_tag
 #            idea_comments GET      /ideas/:idea_id/comments(.:format)     comments#index
 #                          POST     /ideas/:idea_id/comments(.:format)     comments#create
 #             idea_comment GET      /ideas/:idea_id/comments/:id(.:format) comments#show
@@ -38,6 +42,18 @@
 #                          PATCH    /ideas/:id(.:format)                   ideas#update
 #                          PUT      /ideas/:id(.:format)                   ideas#update
 #                          DELETE   /ideas/:id(.:format)                   ideas#destroy
+#             technologies GET      /technologies(.:format)                technologies#index
+#                          POST     /technologies(.:format)                technologies#create
+#               technology GET      /technologies/:id(.:format)            technologies#show
+#                          PATCH    /technologies/:id(.:format)            technologies#update
+#                          PUT      /technologies/:id(.:format)            technologies#update
+#                          DELETE   /technologies/:id(.:format)            technologies#destroy
+#                     tags GET      /tags(.:format)                        tags#index
+#                          POST     /tags(.:format)                        tags#create
+#                      tag GET      /tags/:id(.:format)                    tags#show
+#                          PATCH    /tags/:id(.:format)                    tags#update
+#                          PUT      /tags/:id(.:format)                    tags#update
+#                          DELETE   /tags/:id(.:format)                    tags#destroy
 # 
 # Routes for LetterOpenerWeb::Engine:
 # clear_letters DELETE /clear(.:format)                 letter_opener_web/letters#clear
@@ -57,8 +73,11 @@ Rails.application.routes.draw do
   resources :ideas do
     post 'like'
     post 'unlike'
+    post 'add_tag'
+    post 'remove_tag'
     resources :comments
   end
 
   resources :technologies
+  resources :tags
 end
