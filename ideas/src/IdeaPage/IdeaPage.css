@@ -1,0 +1,41 @@
+.container-fluid {
+	margin: 5% 20% !important; 
+}
+
+@media screen and (max-width: 480px) {
+    .container-fluid {
+        margin: 2% 2% !important;
+	}
+	#commentsBox > ul {
+		padding-left: 0;
+	}
+}
+
+#description {
+	border-style: solid;
+	border-width: 3px;
+	border-color: red;
+	border-radius: 5px;
+	padding: 1em;
+	margin-bottom: 1em;
+}
+
+#statusBox {
+	display: inline;
+	background-color: red;
+	padding: 0.5em;
+	margin: 3px 3px 0px 0px;
+	border-radius: 0px 0px 0px 20px;
+}
+
+#naviBox {
+	font-size: 2em;
+}
+
+ul {
+list-style-type: none;
+}
+
+a { 
+    color: blue;
+}
