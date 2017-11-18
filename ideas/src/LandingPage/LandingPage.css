@@ -1,0 +1,41 @@
+.vertical-center {
+	min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+	min-height: 100vh; /* These two lines are counted as one :-)       */
+  
+	display: flex;
+	align-items: center;
+  }
+
+  textarea {
+	  height:55px; /* Note this is the same height as the placeholders line-height */
+	  resize: none;
+	  overflow: hidden;
+}
+
+::-webkit-input-placeholder {
+    color: red;
+	text-align: center;
+	line-height:55px;
+}
+:-moz-placeholder {
+    /* Firefox 18- */
+    color: red;
+	text-align: center;
+	line-height:55px;
+}
+::-moz-placeholder {
+    /* Firefox 19+ */
+    color: red;
+	text-align: center;
+	line-height:55px;
+}
+:-ms-input-placeholder {
+    color: red;
+	text-align: center;
+	line-height:55px;
+}
+
+#idea, #problem
+{
+	width: 50%;
+}
