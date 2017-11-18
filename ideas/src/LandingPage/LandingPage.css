@@ -7,33 +7,33 @@
   }
 
   textarea {
-	  height:55px; /* Note this is the same height as the placeholders line-height */
-	  resize: none;
-	  overflow: hidden;
+	height:55px; /* Note this is the same height as the placeholders line-height */
+	resize: none;
+	overflow: hidden;
 }
 
 ::-webkit-input-placeholder {
-    color: red;
+    color: gray;
 	text-align: center;
 	line-height:55px;
 	font-size: 1.25em;
 }
 :-moz-placeholder {
     /* Firefox 18- */
-    color: red;
+    color: gray;
 	text-align: center;
 	line-height:55px;
 	font-size: 1.25em;	
 }
 ::-moz-placeholder {
     /* Firefox 19+ */
-    color: red;
+    color: gray;
 	text-align: center;
 	line-height:55px;
 	font-size: 1.25em;
 }
 :-ms-input-placeholder {
-    color: red;
+    color: gray;
 	text-align: center;
 	line-height:55px;
 	font-size: 1.25em;

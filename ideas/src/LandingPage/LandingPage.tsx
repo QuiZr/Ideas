@@ -26,7 +26,7 @@ class LandingPage extends React.Component {
           <button onClick={submit} className="btn btn-block btn-primary">Starts</button>
           <br />
           <div className="pull-left"><Link to="/register">Register</Link></div>
-          <div className="pull-right"><Link to="/login">Login</Link></div>
+          <div className="pull-right"><Link to="/register">Login</Link></div>
         </div>
         <div id="loaderModal" style={{ display: 'none' }}>
           <div className="loader" style={{ margin: 'auto' }}/>
