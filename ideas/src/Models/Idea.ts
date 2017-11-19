@@ -13,6 +13,7 @@ class Idea {
   user_id: number;
   tags: Tag[];
   comments: Comment[];
+  likes: number;
    /* tslint:enable */ 
 }
 

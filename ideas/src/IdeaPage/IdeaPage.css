@@ -28,6 +28,14 @@
 	border-radius: 0px 0px 0px 20px;
 }
 
+#likeButton {
+	display: inline;
+	background-color: red;
+	padding: 1em 1em 0.2em 1em;
+	margin: -66px 3px 0px 0px;
+	border-radius: 20px 0px 0px 0px;
+}
+
 #naviBox {
 	font-size: 2em;
 }

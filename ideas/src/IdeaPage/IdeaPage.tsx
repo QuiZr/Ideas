@@ -9,6 +9,12 @@ class IdeaPage extends React.Component<{}, { data: Idea | null }> {
     super(props);
     this.state = { data: null };
     this.setStorageTagKey = this.setStorageTagKey.bind(this);
+    this.like = this.like.bind(this);
+    this.refresh = this.refresh.bind(this);
+    this.refresh();
+  }
+
+  refresh() {
     const headers = new Headers();
     headers.append('Accept', 'application/json');
     headers.append('Content-Type', 'application/json');
@@ -19,7 +25,7 @@ class IdeaPage extends React.Component<{}, { data: Idea | null }> {
       method: 'get',
       headers: headers
     }).then((r) => r.json())
-      .then((r: Idea) => this.setState({ data: r }));
+      .then((r: Idea) => this.setState({ data: r }, () => this.setStatusColor()));
   }
 
   setStorageTagKey(tag: string) {
@@ -27,13 +33,24 @@ class IdeaPage extends React.Component<{}, { data: Idea | null }> {
     return true;
   }
 
+  like() {
+    const headers = new Headers();
+    headers.append('Accept', 'application/json');
+    headers.append('Content-Type', 'application/json');
+    headers.append('access-token', localStorage.getItem('access-token') as string);
+    headers.append('client', localStorage.getItem('client') as string);
+    headers.append('uid', localStorage.getItem('uid') as string);
+    fetch('http://' + process.env.REACT_APP_API_HOST + ':3000/ideas/' + (this.props as any).match.params.id + '/like', {
+      method: 'post',
+      headers: headers
+    }).then(() => this.refresh());
+  }
+
   render() {
-    // {REMOVE ME}
-    setStatusColor();
+    this.setStatusColor();
     if (!this.state.data) {
       return null;
     }
-
     return (
       <div>
         <div className="container-fluid wrapper">
@@ -54,6 +71,10 @@ class IdeaPage extends React.Component<{}, { data: Idea | null }> {
               <p className="text-left">
                 {this.state.data.desc_long}
               </p>
+            </div>
+            <div id="likeButton" className="pull-right" onClick={this.like}>
+              <span className="glyphicon glyphicon-thumbs-up" style={{ fontSize: '2em' }} />
+              {this.state.data.likes}
             </div>
             <div className="row">
               <h4 className="col-md-4">
@@ -99,18 +120,41 @@ class IdeaPage extends React.Component<{}, { data: Idea | null }> {
       </div >
     );
   }
-}
 
-function setStatusColor() {
-  let color = 'blue';
-  let box = document.getElementById('description');
-  let ribbon = document.getElementById('statusBox');
-  if (box == null || ribbon == null) {
-    return;
+  setStatusColor() {
+    if (!this.state.data) {
+      return;
+    }
+    let color = 'blue';
+    switch (this.state.data.status) {
+      case 'idea':
+        color = 'yellow';
+        break;
+      case 'problem':
+        color = 'red';
+        break;
+      case 'doing':
+        color = 'pink';
+        break;
+      case 'done':
+        color = 'green';
+        break;
+      default:
+        color = 'black';
+        break;
+    }
+
+    let box = document.getElementById('description');
+    let ribbon = document.getElementById('statusBox');
+    let like = document.getElementById('likeButton');
+    if (box == null || ribbon == null || like == null) {
+      return;
+    }
+
+    box.style.borderColor = color;
+    like.style.backgroundColor = color;
+    ribbon.style.backgroundColor = color;
   }
-
-  box.style.borderColor = color;
-  ribbon.style.backgroundColor = color;
 }
 
 export default IdeaPage;
