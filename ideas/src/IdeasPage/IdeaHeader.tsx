@@ -1,5 +1,6 @@
 import * as React from 'react';
 import './IdeasPage.css';
+import { Link } from 'react-router-dom';
 
 class Props {
   handleChange: (event: /* tslint:disable */ any /* tslint:enable */) => void;
@@ -20,13 +21,21 @@ class IdeaHeader extends React.Component<Props, {}> {
   }
 
   render() {
+    console.log(this.state);
     return (
-      <div>
-        <select name="status" id="status" onChange={this.handleChange} value={this.props.status} >
-          <option value="idea">Idea</option>
-          <option value="problem">Problem</option>
-          <option value="doing">Doing</option>
-          <option value="done">Done</option>
+      <div className="container-fluid wrapper">
+
+        <div id="naviBox">
+          <Link to="/"><span className="glyphicon glyphicon-plus pull-left" /></Link>
+          <Link to="/"><span className="glyphicon glyphicon-cog pull-right" /></Link>
+        </div>
+        <br />
+        <h1 className="text-center">Ideas</h1>
+        <select multiple className="text-center" size={1} name="status" id="status" onChange={this.handleChange} value={this.props.status} >
+          <option className="btn btn-success" value="idea">Idea</option>
+          <option className="btn btn-success" value="problem">Problem</option>
+          <option className="btn btn-success" value="doing">Doing</option>
+          <option className="btn btn-success" value="done">Done</option>
         </select>
         <input
           className="form-control"

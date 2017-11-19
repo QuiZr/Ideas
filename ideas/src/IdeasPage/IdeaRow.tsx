@@ -8,12 +8,14 @@ class IdeaRow extends React.Component<{ idea: Idea }, {}> {
   render() {
     const idea: Idea = this.props.idea;
     return (
-      <div>
-        <h2>{idea.title}</h2>
-        <div>{idea.desc_short}</div>
-        <Link to={'/idea/' + idea.id}>
-          Read more...
+      <div className="record">
+        <h3>{idea.title}</h3>
+        <p>{idea.desc_short}</p>
+        <button className="btn btn-default">
+          <Link to={'/idea/' + idea.id}>
+            Read more...
         </Link>
+        </button>
       </div>
     );
   }

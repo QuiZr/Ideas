@@ -1,9 +1,9 @@
-.container-fluid {
-	margin: 5% 20% !important; 
+.wrapper {
+	margin: 2em 20% !important; 
 }
 
 @media screen and (max-width: 480px) {
-    .container-fluid {
+    .wrapper {
         margin: 2% 2% !important;
 	}
 	#commentsBox > ul {

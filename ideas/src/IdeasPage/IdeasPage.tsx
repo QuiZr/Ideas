@@ -83,7 +83,9 @@ class IdeasPage extends React.Component<{}, State & { data: Idea[] | null }> {
           status={this.state.status}
           tags={this.state.tags}
         />
-        {ideas}
+        <div className="container-fluid wrapper">
+          {ideas}
+        </div>
       </div>
     );
   }

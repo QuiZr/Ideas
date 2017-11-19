@@ -1,0 +1,56 @@
+* {
+    box-sizing: border-box;
+}
+#data {
+    overflow:hidden;
+    padding:0;
+	width:100vw;
+}
+select {
+	padding:10px;
+	overflow: hidden;
+	border:none;
+	background-color: white;
+	width:100%;
+	white-space: normal;
+	height:200px;
+}
+option {
+	height:2em;
+	width:20%;
+	border:1px solid #000;
+	background-color:white;
+	margin: 0px 10px;
+	display:inline-block;
+}
+
+.wrapper {
+	margin: 5% 20% !important; 
+}
+
+@media screen and (max-width: 480px) {
+    .wrapper {
+        margin: 2% 2% !important;
+	}
+	#commentsBox > ul {
+		padding-left: 0;
+	}
+}
+
+.record {
+	border-style: solid;
+	border-color: black;
+	border-bottom-color: white;
+	border-right-color: white;
+	border-width: 1px;
+	margin-bottom: 20px;
+	padding: 0px 30px;
+}
+
+p {
+	margin: 1em 2em !important;
+}
+
+#naviBox {
+	font-size: 2em;
+}
