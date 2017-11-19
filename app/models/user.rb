@@ -52,4 +52,8 @@ class User < ActiveRecord::Base
     @i = Idea.where(user_id: self.id).map{|c| c.likes}.sum
     @c + @i
   end
+
+  def attributes
+    super.merge({'comments' => comments, 'ideas' => ideas})
+  end
 end
