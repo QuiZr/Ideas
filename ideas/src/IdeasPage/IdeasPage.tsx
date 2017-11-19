@@ -8,6 +8,7 @@ class State {
   search: string;
   tags: string;
   status: string;
+  fix: boolean;
 }
 
 class IdeasPage extends React.Component<{}, State & { data: Idea[] | null }> {
@@ -18,7 +19,8 @@ class IdeasPage extends React.Component<{}, State & { data: Idea[] | null }> {
       data: null,
       search: '',
       tags: '',
-      status: ''
+      status: '',
+      fix: true
     };
     this.updateFilters = this.updateFilters.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -27,7 +29,13 @@ class IdeasPage extends React.Component<{}, State & { data: Idea[] | null }> {
     this.updateFilters();
   }
   handleChange(event: /* tslint:disable */ any /* tslint:enable */) {
-    this.setState({ [event.target.name]: event.target.value }, () => this.updateFilters());
+    if ([event.target.name] == 'status' as any) {
+      if (this.state.fix) {
+        this.setState({ [event.target.name]: event.target.value, fix: false }, () => this.updateFilters());        
+      } else {
+        this.setState({ fix: true });
+      }
+    }
   }
 
   updateFilters() {
