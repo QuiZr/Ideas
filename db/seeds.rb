@@ -7,7 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 5.times do |i|
-  User.create(email: "admin#{i}@example.com", password: "12345678", password_confirmation: "12345678")
+  User.create(email: "admin#{i}@example.com", password: "12345678", password_confirmation: "12345678", nickname: "Admin#{i}")
 end
 
 10.times do |i|
@@ -36,3 +36,32 @@ end
               status: Faker::Number.between(0,3)
   )
 end
+
+User.create(email: "jan@example.com", password: "12345678", password_confirmation: "12345678", nickname: "Jan Kowalski")
+@idea = Idea.create(title: 'Tinder dla muzyków',
+            desc_short: 'Aplikacja, która umożliwiła by odnajdywanie zespołów przez solowych muzyków',
+            desc_long: 'Chcialbym wprowadzić rozwiązanie, które pozwoliło by aby muzycy, którzy aktualnie nie grają w żadnym zespole mogli odnajdywać innych muzyków oraz zespoły, do wspólnego granaia.',
+            user_id: User.last.id,
+            status: 1
+
+)
+
+@idea.tags << Tag.create(title: 'muzyka')
+@idea.tags << Tag.create(title: 'mobile')
+@idea.tags << Tag.create(title: 'web')
+
+Comment.create(idea_id: @idea.id,
+               body: 'Też o tym myślałem!',
+               user_id: Faker::Number.between(User.first.id, User.last.id-1))
+
+Comment.create(idea_id: @idea.id,
+               body: 'Myślę, że pomysł powinien być bardziej szczegółowo opisany.',
+               user_id: Faker::Number.between(User.first.id, User.last.id-1))
+
+Comment.create(idea_id: @idea.id,
+               body: 'Mógłbym się zająć stroną designu tego projektu',
+               user_id: Faker::Number.between(User.first.id, User.last.id-1))
+
+Comment.create(idea_id: @idea.id,
+               body: 'Jestem jak najbardziej za!',
+               user_id: Faker::Number.between(User.first.id, User.last.id-1))
