@@ -13,9 +13,15 @@
 #
 
 class Idea < ApplicationRecord
+  include Filterable
+
   belongs_to :user, optional: true
   has_many :comments
   has_and_belongs_to_many :tags
 
   enum status: [:idea, :problem, :doing, :done]
+
+  scope :status, -> (status) { where status: status }
+  scope :tag, -> (tag) { joins(:tags).where('tags.title = ?', tag) }
+  scope :title, -> (title) { where('title like ?', "%#{title}%") }
 end
