@@ -1,38 +1,28 @@
 import * as React from 'react';
 import './IdeasPage.css';
 
-class State {
+class Props {
+  handleChange: (event: /* tslint:disable */ any /* tslint:enable */) => void;
   search: string;
   tags: string;
   status: string;
 }
 
-class Props {
-  onFiltersChange: (search: string, tags: string, status: string) => void;
-}
-
-class IdeaHeader extends React.Component<Props, State> {
+class IdeaHeader extends React.Component<Props, {}> {
 
   constructor(props: Props) {
     super(props);
-    this.state = {
-      search: '',
-      tags: '',
-      status: ''
-    };
     this.handleChange = this.handleChange.bind(this);
   }
 
   handleChange(event: /* tslint:disable */ any /* tslint:enable */) {
-    this.setState(
-      { [event.target.name]: event.target.value },
-      () => (this.props.onFiltersChange(this.state.search, this.state.tags, this.state.status)));
+    this.props.handleChange(event);
   }
 
   render() {
     return (
       <div>
-        <select name="status" id="status" onChange={this.handleChange} value={this.state.status} >
+        <select name="status" id="status" onChange={this.handleChange} value={this.props.status} >
           <option value="idea">Idea</option>
           <option value="problem">Problem</option>
           <option value="doing">Doing</option>
@@ -43,7 +33,7 @@ class IdeaHeader extends React.Component<Props, State> {
           type="text"
           placeholder="Search"
           onChange={this.handleChange}
-          value={this.state.search}
+          value={this.props.search}
           name="search"
         />
         <input
@@ -51,7 +41,7 @@ class IdeaHeader extends React.Component<Props, State> {
           type="text"
           placeholder="Tags"
           onChange={this.handleChange}
-          value={this.state.tags}
+          value={this.props.tags}
           name="tags"
         />
       </div>

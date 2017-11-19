@@ -1,3 +1,6 @@
+import Tag from './Tag';
+import Comment from './Comment';
+
 class Idea {
    /* tslint:disable */ 
   created_at: Date;
@@ -8,6 +11,8 @@ class Idea {
   title: string;
   updated_at: Date;
   user_id: number;
+  tags: Tag[];
+  comments: Comment[];
    /* tslint:enable */ 
 }
 

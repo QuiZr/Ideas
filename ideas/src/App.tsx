@@ -16,7 +16,7 @@ class App extends React.Component {
       <Router>
         <div>
           <Route exact={true} path="/" component={LandingPage} />
-          <Route exact={true} path="/idea" component={IdeaPage} />          
+          <Route exact={false} path="/idea/:id" component={IdeaPage} />          
           <Route exact={true} path="/ideas" component={IdeasPage} />
           <Route exact={true} path="/register" component={RegisterPage} />          
         </div>
