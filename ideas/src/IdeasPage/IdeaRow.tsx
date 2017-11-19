@@ -10,7 +10,7 @@ class IdeaRow extends React.Component<{ idea: Idea }, {}> {
     return (
       <div className="record">
         <h3>{idea.title}</h3>
-        <p>{idea.desc_short}</p>
+        <p className="tabbed">{idea.desc_short}</p>
         <Link to={'/idea/' + idea.id}>
           <button className="btn btn-default">
             Read more...

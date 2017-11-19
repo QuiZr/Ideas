@@ -1,0 +1,71 @@
+.vertical-center {
+	min-height: 100%;
+	min-height: 100vh; 
+  
+	display: flex;
+	align-items: center;
+  }
+
+  .wrapper {
+	margin: 2em 20% !important; 
+}
+
+@media screen and (max-width: 480px) {
+    .wrapper {
+        margin: 2% 2% !important;
+	}
+	#commentsBox > ul {
+		padding-left: 0;
+	}
+}
+
+#naviBox {
+	font-size: 2em;
+}
+
+#info {
+	border-left: 1px solid black;
+	padding: 0px;
+}
+
+#activity {
+	border-left: 1px solid black;	
+	padding: 1em;
+}
+
+.bioList {
+list-style-type: none;
+padding: 0px;
+margin: 1em
+}
+
+#bio {
+	padding: 1em;
+}
+
+#avatar {
+	width: 150px;
+	height: 180px;
+	margin: auto;
+	border: 5px solid green;
+}
+
+#username {
+	margin: auto;
+}
+
+.ideaLink 
+{
+	width: 90% !important;
+	min-height: 5em;
+	margin: 0.5em;
+	text-overflow: ellipsis;
+	white-space: pre-wrap !important;
+	text-align: left !important;
+}
+
+.activityLink 
+{
+	white-space: pre-wrap !important;
+	text-align: left !important;
+}

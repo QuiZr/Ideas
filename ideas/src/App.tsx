@@ -10,6 +10,7 @@ import RegisterPage from './RegisterPage/RegisterPage';
 import IdeaPage from './IdeaPage/IdeaPage';
 import IdeasPage from './IdeasPage/IdeasPage';
 import UserListPage from './UserListPage/UserListPage';
+import UserPage from './UserPage/UserPage';
 
 class App extends React.Component {
   render() {
@@ -20,6 +21,7 @@ class App extends React.Component {
           <Route exact={false} path="/idea/:id" component={IdeaPage} />          
           <Route exact={true} path="/ideas" component={IdeasPage} />
           <Route exact={true} path="/register" component={RegisterPage} />          
+          <Route exact={true} path="/user" component={UserPage} />          
           <Route exact={true} path="/users" component={UserListPage} />          
         </div>
       </Router>
