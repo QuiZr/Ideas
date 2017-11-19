@@ -8,6 +8,7 @@ import './App.css';
 import LandingPage from './LandingPage/LandingPage';
 import RegisterPage from './RegisterPage/RegisterPage';
 import IdeaPage from './IdeaPage/IdeaPage';
+import IdeasPage from './IdeasPage/IdeasPage';
 
 class App extends React.Component {
   render() {
@@ -15,8 +16,9 @@ class App extends React.Component {
       <Router>
         <div>
           <Route exact={true} path="/" component={LandingPage} />
-          <Route exact={true} path="/register" component={RegisterPage} />          
           <Route exact={true} path="/idea" component={IdeaPage} />          
+          <Route exact={true} path="/ideas" component={IdeasPage} />
+          <Route exact={true} path="/register" component={RegisterPage} />          
         </div>
       </Router>
     );
