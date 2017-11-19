@@ -21,4 +21,7 @@ end
 5.times do |i|
   @idea = Idea.create(title: Faker::Book.title, desc_short: Faker::Lorem.sentence, desc_long: Faker::Lorem.paragraph, user_id: i+1, status: 0)
   Comment.create(idea_id: @idea.id, body: Faker::Lorem.sentence, user_id: i+1)
+  3.times do
+    @idea.tags << Tag.find(Faker::Number.between(Tag.first.id, Tag.last.id))
+  end
 end
