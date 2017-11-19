@@ -62,7 +62,6 @@ class IdeaPage extends React.Component<{}, { data: Idea | null, comment: string 
     headers.append('access-token', localStorage.getItem('access-token') as string);
     headers.append('client', localStorage.getItem('client') as string);
     headers.append('uid', localStorage.getItem('uid') as string);
-    console.log(this.state)
     fetch('http://' + process.env.REACT_APP_API_HOST + ':3000/ideas/' + (this.props as any).match.params.id + '/comments', {
       method: 'post',
       headers: headers,
@@ -70,7 +69,7 @@ class IdeaPage extends React.Component<{}, { data: Idea | null, comment: string 
         body: this.state.comment,
         idea_id: (this.props as any).match.params.id
       })
-    }).then(() => this.refresh());
+    }).then(() => { this.setState({ comment: '' }, () => this.refresh()); });
   }
 
   render() {
@@ -146,12 +145,18 @@ class IdeaPage extends React.Component<{}, { data: Idea | null, comment: string 
             </ul>
           </div>
           <div id="addComentBox" className="col md-12">
-              <div className="form-group">
-                <label>Your comment:</label>
-                <textarea className="form-control" onChange={this.handleChange} id="comment" name="comment"></textarea>
-              </div>
-              <br/>
-              <button onClick={this.addComment} className="btn btn-success btn-block">Submit</button>
+            <div className="form-group">
+              <label>Your comment:</label>
+              <textarea
+                className="form-control"
+                onChange={this.handleChange}
+                id="comment"
+                name="comment"
+                value={this.state.comment}
+              />
+            </div>
+            <br />
+            <button onClick={this.addComment} className="btn btn-success btn-block">Submit</button>
           </div>
         </div>
       </div >

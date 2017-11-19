@@ -104,9 +104,9 @@ class UserPage extends React.Component<{}, State> {
                 <h4>{this.state.data.email}</h4>
               </div>
               <ul className="bioList">
-                <li>Pomysłów: <span className="pull-right">{this.state.data.ideas.length}</span> </li>
-                <li>Rozwiązań: <span className="pull-right">{this.randomInt()}</span> </li>
-                <li>Komentarzy: <span className="pull-right">{this.state.data.comments.length}</span> </li>
+                <li>Ideas: <span className="pull-right">{this.state.data.ideas.length}</span> </li>
+                <li>Solutions: <span className="pull-right">{this.randomInt()}</span> </li>
+                <li>Comments: <span className="pull-right">{this.state.data.comments.length}</span> </li>
               </ul>
               <hr />
               <div id="bio">

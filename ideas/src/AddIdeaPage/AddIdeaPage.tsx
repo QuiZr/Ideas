@@ -18,19 +18,19 @@ class AddIdeaPage extends React.Component {
 
           <form>
             <div className="form-group">
-              <label>Tytuł:</label>
+              <label>Title:</label>
               <input className="form-control" id="email" />
             </div>
             <div className="form-group">
-              <label>Krótki opis:</label>
+              <label>Short description:</label>
               <textarea className="form-control" rows={2} id="comment"></textarea>
             </div>
             <div className="form-group">
-              <label>Szczegóły:</label>
+              <label>Details:</label>
               <textarea className="form-control" rows={5} id="comment"></textarea>
             </div>
             <div className="btn-group btn-block">
-              <button id="idea" onClick={toggle2} className="btn btn-default">Pomysł</button>
+              <button id="idea" onClick={toggle2} className="btn btn-default">Idea</button>
               <button id="problem" onClick={toggle2} className="btn btn-primary active">Problem</button>
             </div>
             <br /><br />

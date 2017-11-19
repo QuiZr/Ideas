@@ -18,7 +18,7 @@ class LandingPage extends React.Component {
           />
           <br />
           <div className="btn-group btn-block btn-toggle">
-            <button id="idea" onClick={toggle} className="btn btn-default">Pomysł</button>
+            <button id="idea" onClick={toggle} className="btn btn-default">Idea</button>
             <button id="problem" onClick={toggle} className="btn btn-primary active">Problem</button>
           </div>
           <br />
