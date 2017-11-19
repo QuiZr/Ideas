@@ -13,4 +13,12 @@
 class Comment < ApplicationRecord
   belongs_to :idea
   belongs_to :user
+
+  def user_email
+    User.find(self.user.id).email
+  end
+
+  def attributes
+    super.merge({'user_email' => user_email})
+  end
 end
