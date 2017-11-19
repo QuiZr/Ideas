@@ -35,6 +35,9 @@ class User < ActiveRecord::Base
           :recoverable, :rememberable, :trackable, :validatable,
           :confirmable, :omniauthable
   include DeviseTokenAuth::Concerns::User
+  include Filterable
+
+  scope :address, -> (address) { where('email like ?', "%#{address}%") }
 
   def skip
     self.skip_confirmation!
