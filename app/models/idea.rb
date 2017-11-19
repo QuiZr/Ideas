@@ -24,4 +24,12 @@ class Idea < ApplicationRecord
   scope :status, -> (status) { where status: status }
   scope :tag, -> (tag) { joins(:tags).where('tags.title = ?', tag) }
   scope :title, -> (title) { where('title like ?', "%#{title}%") }
+
+  def likes
+    Like.where(idea_id: self.id).count
+  end
+
+  def attributes
+    super.merge({'likes' => likes, 'comments' => comments, 'tags' => tags})
+  end
 end
