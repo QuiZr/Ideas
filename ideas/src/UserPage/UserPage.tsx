@@ -8,8 +8,8 @@ class UserPage extends React.Component {
 			<div>
 				<div className="container-fluid wrapper">
 					<div id="naviBox">
-						<Link to="/"><span className="glyphicon glyphicon-plus pull-left" /></Link>
-						<Link to="/"><span className="glyphicon glyphicon-cog pull-right" /></Link>
+						<Link to="/"><span className="glyphicon glyphicon-home pull-left" /></Link>
+						<Link to="/"><span className="glyphicon glyphicon-off pull-right" /></Link>
 					</div>
 					<br />
 					<h1 className="text-center">Ideas</h1>
