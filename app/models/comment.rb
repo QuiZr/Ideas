@@ -14,6 +14,10 @@ class Comment < ApplicationRecord
   belongs_to :idea
   belongs_to :user
 
+  def likes
+    CommentLike.where(comment_id: self.id).count
+  end
+
   def user_email
     User.find(self.user.id).email
   end

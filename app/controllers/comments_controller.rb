@@ -28,6 +28,19 @@ class CommentsController < ApplicationController
     head :no_content
   end
 
+  def like
+    @comment = Comment.find(params[:comment_id])
+    CommentLike.create(comment_id: @comment.id, user_id: current_user.id)
+    json_response(@comment)
+  end
+
+  # POST /todos/:id/unlike
+  def unlike
+    @comment = Comment.find(params[:comment_id])
+    CommentLike.where(comment_id: params[:comment_id]).where(user_id: current_user.id)
+    json_response(@comment)
+  end
+
   private
 
   def comment_params

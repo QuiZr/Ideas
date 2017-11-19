@@ -1,6 +1,6 @@
 class IdeasController < ApplicationController
   before_action :set_idea, only: [:show, :update, :destroy]
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:index, :show]
 
   # GET /ideas
   def index
@@ -58,6 +58,12 @@ class IdeasController < ApplicationController
     @idea.tags.delete(Tag.find(params[:tag_id]))
     @idea.save
     json_response(@idea.tags)
+  end
+
+  def solved
+    @idea = Idea.find(params[:idea_id])
+    @idea.done!
+    json_response(@idea)
   end
 
   private

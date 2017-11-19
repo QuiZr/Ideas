@@ -40,4 +40,10 @@ class User < ActiveRecord::Base
     self.skip_confirmation!
     self.save
   end
+
+  def received_likes
+    @c = Comment.where(user_id: self.id).map{|c| c.likes}.sum
+    @i = Idea.where(user_id: self.id).map{|c| c.likes}.sum
+    @c + @i
+  end
 end
