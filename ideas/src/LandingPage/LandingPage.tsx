@@ -12,9 +12,9 @@ class LandingPage extends React.Component {
             className="form-control"
             id="title"
             rows={3}
-            cols={30}
+            cols={40}
             style={{ overflow: 'hidden' }}
-            placeholder="Co chciałbyś dziś zmienić?"
+            placeholder="What would you like to change today?"
           />
           <br />
           <div className="btn-group btn-block btn-toggle">

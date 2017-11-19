@@ -77,16 +77,16 @@ class RegisterPage extends React.Component<{}, { email: string; password: string
           <div style={{ margin: 'auto' }} className="text-center">
 
             <button className="btn btn-block btn-success" onClick={this.login}>
-              Zaloguj się
+              Log in
             </button>
             <button className="btn btn-block btn-default" onClick={this.register}>
-              Zarejestruj się
+              Register
             </button>
             <a className="btn btn-block btn-social btn-facebook">
-              <span className="fa fa-facebook" />&nbsp;&nbsp;&nbsp;&nbsp;Kontynuuj z FB
+              <span className="fa fa-facebook" />&nbsp;&nbsp;&nbsp;&nbsp;Continue with FB
             </a>
             <a className="btn btn-block btn-social btn-google">
-              <span className="fa fa-google" />&nbsp;&nbsp;&nbsp;&nbsp;Kontynuuj z Google
+              <span className="fa fa-google" />&nbsp;&nbsp;&nbsp;&nbsp;Continue with Google
             </a>
           </div>
         </div>
