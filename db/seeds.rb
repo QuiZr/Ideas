@@ -29,12 +29,15 @@ end
 end
 
 20.times do
-  Idea.create(title: Faker::Book.title,
+  @idea = Idea.create(title: Faker::Book.title,
               desc_short: Faker::Lorem.sentence,
               desc_long: Faker::Lorem.paragraph,
               user_id: Faker::Number.between(User.first.id, User.last.id),
               status: Faker::Number.between(0,3)
   )
+  3.times do
+    @idea.tags << Tag.find(Faker::Number.between(Tag.first.id, Tag.last.id))
+  end
 end
 
 User.create(email: "jan@example.com", password: "12345678", password_confirmation: "12345678", nickname: "Jan Kowalski")
