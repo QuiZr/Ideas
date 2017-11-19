@@ -10,6 +10,7 @@ class CommentsController < ApplicationController
 
   def create
     @comment = @idea.comments.build(comment_params)
+    @comment.user_id = current_user.id
     @comment.save
     json_response(@comment, :created)
   end
@@ -44,7 +45,7 @@ class CommentsController < ApplicationController
   private
 
   def comment_params
-    params.permit(:body, :idea_id, :user_id)
+    params.permit(:body, :idea_id)
   end
 
   def set_ideas
