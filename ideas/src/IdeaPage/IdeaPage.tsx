@@ -3,14 +3,16 @@ import './IdeaPage.css';
 import { Link } from 'react-router-dom';
 import Idea from '../Models/Idea';
 
-class IdeaPage extends React.Component<{}, { data: Idea | null }> {
+class IdeaPage extends React.Component<{}, { data: Idea | null, comment: string }> {
 
   constructor(props: {}) {
     super(props);
-    this.state = { data: null };
+    this.state = { data: null, comment: "" };
     this.setStorageTagKey = this.setStorageTagKey.bind(this);
     this.like = this.like.bind(this);
     this.refresh = this.refresh.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.addComment = this.addComment.bind(this);
     this.refresh();
   }
 
@@ -43,6 +45,31 @@ class IdeaPage extends React.Component<{}, { data: Idea | null }> {
     fetch('http://' + process.env.REACT_APP_API_HOST + ':3000/ideas/' + (this.props as any).match.params.id + '/like', {
       method: 'post',
       headers: headers
+    }).then(() => this.refresh());
+  }
+
+
+  handleChange(event: /* tslint:disable */ any /* tslint:enable */) {
+    this.setState({
+      [event.target.name]: event.target.value
+    });
+  }
+
+  addComment() {
+    const headers = new Headers();
+    headers.append('Accept', 'application/json');
+    headers.append('Content-Type', 'application/json');
+    headers.append('access-token', localStorage.getItem('access-token') as string);
+    headers.append('client', localStorage.getItem('client') as string);
+    headers.append('uid', localStorage.getItem('uid') as string);
+    console.log(this.state)
+    fetch('http://' + process.env.REACT_APP_API_HOST + ':3000/ideas/' + (this.props as any).match.params.id + '/comments', {
+      method: 'post',
+      headers: headers,
+      body: JSON.stringify({
+        body: this.state.comment,
+        idea_id: (this.props as any).match.params.id
+      })
     }).then(() => this.refresh());
   }
 
@@ -117,6 +144,14 @@ class IdeaPage extends React.Component<{}, { data: Idea | null }> {
                 </li>
               ))}
             </ul>
+          </div>
+          <div id="addComentBox" className="col md-12">
+              <div className="form-group">
+                <label>Your comment:</label>
+                <textarea className="form-control" onChange={this.handleChange} id="comment" name="comment"></textarea>
+              </div>
+              <br/>
+              <button onClick={this.addComment} className="btn btn-success btn-block">Submit</button>
           </div>
         </div>
       </div >
