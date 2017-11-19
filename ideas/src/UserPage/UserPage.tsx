@@ -1,117 +1,150 @@
+import User from '../Models/User';
 import * as React from 'react';
 import './UserPage.css';
 import { Link } from 'react-router-dom';
 
-class UserPage extends React.Component {
-	render() {
-		return (
-			<div>
-				<div className="container-fluid wrapper">
-					<div id="naviBox">
-						<Link to="/"><span className="glyphicon glyphicon-plus pull-left" /></Link>
-						<Link to="/"><span className="glyphicon glyphicon-cog pull-right" /></Link>
-					</div>
-					<br />
-					<h1 className="text-center">Ideas</h1>
-					<div className="row">
-						<div id="info" className="col-md-4">
-							<div id="avatar" className="text-center">X</div>
-							<div className="text-center">
-								<h4>Username</h4>
+class State {
+  data: User | null;
+}
+
+class UserPage extends React.Component<{}, State> {
+
+  constructor(props: {}) {
+    super(props);
+
+    this.logout = this.logout.bind(this);
+    this.randomInt = this.randomInt.bind(this);
+
+    this.state = { data: null };
+
+    const headers = new Headers();
+    headers.append('Accept', 'application/json');
+    headers.append('Content-Type', 'application/json');
+    headers.append('access-token', localStorage.getItem('access-token') as string);
+    headers.append('client', localStorage.getItem('client') as string);
+    headers.append('uid', localStorage.getItem('uid') as string);
+    fetch('http://' + process.env.REACT_APP_API_HOST + ':3000/users?address=' + (this.props as any).match.params.id, {
+      method: 'get',
+      headers: headers
+    }).then((r) => r.json())
+      .then((r) => this.setState({ data: r[0] }));
+  }
+
+  logout() {
+    console.log('logout');
+  }
+
+  randomInt() {
+    return Math.round(Math.random() * 7);
+  }
+
+  render() {
+    if (!this.state.data) {
+      return null;
+    }
+    console.log(this.state.data);
+    return (
+      <div>
+        <div className="container-fluid wrapper">
+          <div id="naviBox">
+            <Link to="/ideas">
+              <span className="glyphicon glyphicon-home pull-left" />
+            </Link>
+            <Link to="/">
+              <span onClick={this.logout} className="glyphicon glyphicon-off pull-right" />
+            </Link>
+          </div>
+          <br />
+          <h1 className="text-center">Ideas</h1>
+          <div className="row">
+            <div id="info" className="col-md-4">
+              <div id="avatar" className="text-center">
+                <img
+                  src={'https://api.adorable.io/avatars/180/' + this.state.data.uid}
+                  alt="X"
+                  width="141"
+                  height="171"
+                />
+              </div>
+              <div className="text-center">
+                <h4>{this.state.data.email}</h4>
+              </div>
+              <ul className="bioList">
+                <li>Pomysłów: <span className="pull-right">{this.state.data.ideas.length}</span> </li>
+                <li>Rozwiązań: <span className="pull-right">{this.randomInt()}</span> </li>
+                <li>Komentarzy: <span className="pull-right">{this.state.data.comments.length}</span> </li>
+              </ul>
+              <hr />
+              <div id="bio">
+                Sed posuere eros neque, sed blandit sem malesuada ac. Cras a sem venenatis, dapibus dui eu, rhoncus tortor. Fusce at odio vitae mi interdum ornare. Praesent imperdiet feugiat nunc, et tincidunt lectus interdum et.
 							</div>
-							<ul className="bioList">
-								<li>Pomysłów: <span className="pull-right">10</span> </li>
-								<li>Rozwiązań: <span className="pull-right">5</span> </li>
-								<li>Komentarzy: <span className="pull-right">30</span> </li>
-							</ul>
-							<hr />
-							<div id="bio">
-								Sed posuere eros neque, sed blandit sem malesuada ac. Cras a sem venenatis, dapibus dui eu, rhoncus tortor. Fusce at odio vitae mi interdum ornare. Praesent imperdiet feugiat nunc, et tincidunt lectus interdum et.
-							</div>
-						</div>
-						<div id="activity" className="col-md-8" >
-							<div className="row text-center">
-								<div className="col-md-6">
-									<button className="btn btn-default ideaLink">
-									Rozwiązanie <br/>
-									<b>Ut ultricies dictum ante non elementum.</b>
-									</button>
-								</div>
-								<div className="col-md-6">
-									<button className="btn btn-default ideaLink">
-									Rozwiązanie <br/>
-									<b>Ut ultricies dictum ante non elementum.</b>
-									</button>
-								</div>
-							</div>
-							<div className="row text-center">
-								<div className="col-md-6 text-center">
-									<button className="btn btn-default ideaLink">
-									Rozwiązanie <br/>
-									<b>Ut ultricies dictum ante non elementum.</b>
-									</button>
-								</div>
-								<div className="col-md-6 text-center">
-									<button className="btn btn-default ideaLink">
-									Rozwiązanie <br/>
-									<b>Ut ultricies dictum ante non elementum.</b>
-									</button>
-								</div>
-							</div>
-							<div className="row text-center">
-								<div className="col-md-6 text-center">
-									<button className="btn btn-default ideaLink">
-									Rozwiązanie <br/>
-									<b>Ut ultricies dictum ante non elementum.</b>
-									</button>
-								</div>
-								<div className="col-md-6 text-center">
-									<button className="btn btn-default ideaLink">
-									Rozwiązanie <br/>
-									<b>Ut ultricies dictum ante non elementum.</b>
-									</button>
-								</div>
-							</div>
-							<hr />
-							<div>
-								<h4>Ostatnia aktywność</h4>
-								<div className="text-center">
-									<button className="btn btn-default activityLink">
-										<span className="pull-left"> Skomentował <Link to="#"><b>pomysł1</b></Link></span><br/>
-										<span className="pull-left"><i>Etiam porttitor velit orci, at eleifend libero consectetur at. Sed venenatis id leo vulputate commodo.</i></span>
-									</button>
-								</div>
-								<div className="text-center">
-									<button className="btn btn-default activityLink">
-										<span className="pull-left"> Skomentował <Link to="#"><b>pomysł2</b></Link></span><br/>
-										<span className="pull-left"><i>Etiam porttitor velit orci, at eleifend libero consectetur at. Sed venenatis id leo vulputate commodo.</i></span>
-									</button>
-								</div>
-								<div className="text-center">
-									<button className="btn btn-default activityLink">
-										<span className="pull-left"> Skomentował <Link to="#"><b>pomysł3</b></Link></span><br/>
-										<span className="pull-left"><i>Etiam porttitor velit orci, at eleifend libero consectetur at. Sed venenatis id leo vulputate commodo.</i></span>
-									</button>
-								</div>
-								<div className="text-center">
-									<button className="btn btn-default activityLink">
-										<span className="pull-left"> Skomentował <Link to="#"><b>pomysł4</b></Link></span><br/>
-										<span className="pull-left"><i>Etiam porttitor velit orci, at eleifend libero consectetur at. Sed venenatis id leo vulputate commodo.</i></span>
-									</button>
-								</div>
-								<div className="text-center">
-									<button className="btn btn-default activityLink">
-										<span className="pull-left"> Skomentował <Link to="#"><b>pomysł5</b></Link></span><br/>
-										<span className="pull-left"><i>Etiam porttitor velit orci, at eleifend libero consectetur at. Sed venenatis id leo vulputate commodo.</i></span>
-									</button>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		);
-	}
+            </div>
+            <div id="activity" className="col-md-8" >
+              <div className="row text-center">
+                <div className="col-md-6">
+                  <button className="btn btn-default ideaLink">
+                    Rozwiązanie <br />
+                    <b>Ut ultricies dictum ante non elementum.</b>
+                  </button>
+                </div>
+                <div className="col-md-6">
+                  <button className="btn btn-default ideaLink">
+                    Rozwiązanie <br />
+                    <b>Ut ultricies dictum ante non elementum.</b>
+                  </button>
+                </div>
+              </div>
+              <div className="row text-center">
+                <div className="col-md-6 text-center">
+                  <button className="btn btn-default ideaLink">
+                    Rozwiązanie <br />
+                    <b>Ut ultricies dictum ante non elementum.</b>
+                  </button>
+                </div>
+                <div className="col-md-6 text-center">
+                  <button className="btn btn-default ideaLink">
+                    Rozwiązanie <br />
+                    <b>Ut ultricies dictum ante non elementum.</b>
+                  </button>
+                </div>
+              </div>
+              <div className="row text-center">
+                <div className="col-md-6 text-center">
+                  <button className="btn btn-default ideaLink">
+                    Rozwiązanie <br />
+                    <b>Ut ultricies dictum ante non elementum.</b>
+                  </button>
+                </div>
+                <div className="col-md-6 text-center">
+                  <button className="btn btn-default ideaLink">
+                    Rozwiązanie <br />
+                    <b>Ut ultricies dictum ante non elementum.</b>
+                  </button>
+                </div>
+              </div>
+              <hr />
+              <div>
+                <h4>Ostatnia aktywność</h4>
+                {this.state.data.comments.map((comment) => (
+                  <div className="text-center">
+                    <button className="btn btn-default activityLink">
+                      <span className="pull-left">
+                        Commented <Link to="#">
+                          <b>{comment.created_at}</b>
+                        </Link>
+                      </span>
+                      <br />
+                      <span className="pull-left"><i>{comment.body + Array(200).join(' ')}</i></span>
+                    </button>
+                  </div>)
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 }
 
 export default UserPage;

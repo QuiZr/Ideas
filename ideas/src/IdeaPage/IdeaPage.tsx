@@ -56,7 +56,9 @@ class IdeaPage extends React.Component<{}, { data: Idea | null }> {
         <div className="container-fluid wrapper">
           <div id="naviBox">
             <Link to="/ideas"><span className="glyphicon glyphicon-home pull-left" /></Link>
-            <Link to="/"><span className="glyphicon glyphicon-cog pull-right" /></Link>
+            <Link to={'/user/' + localStorage.getItem('uid')}>
+              <span className="glyphicon glyphicon-cog pull-right" />
+            </Link>
           </div>
           <br />
           <div id="ideaBox">
@@ -109,7 +111,7 @@ class IdeaPage extends React.Component<{}, { data: Idea | null }> {
                   <div className="comment">
                     <blockquote>
                       <p>{comment.body}</p>
-                      <footer><Link to={'/user/' + comment.user_id}>{comment.user_email}</Link></footer>
+                      <footer><Link to={'/user/' + comment.user_email}>{comment.user_email}</Link></footer>
                     </blockquote>
                   </div>
                 </li>

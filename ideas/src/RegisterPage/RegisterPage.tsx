@@ -42,7 +42,7 @@ class RegisterPage extends React.Component<{}, { email: string; password: string
         password: this.state.password,
         password_confirmation: this.state.password
       })
-    }).then(() => this.login);
+    }).then(() => this.login());
   }
 
   handleChange(event: /* tslint:disable */ any /* tslint:enable */) {

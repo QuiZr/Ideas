@@ -14,7 +14,7 @@ class LandingPage extends React.Component {
             rows={3}
             cols={30}
             style={{ overflow: 'hidden' }}
-            placeholder="Co chciałyś dziś zmienić?"
+            placeholder="Co chciałbyś dziś zmienić?"
           />
           <br />
           <div className="btn-group btn-block btn-toggle">
@@ -23,13 +23,17 @@ class LandingPage extends React.Component {
           </div>
           <br />
           <br />
-          <button onClick={submit} className="btn btn-block btn-primary">Starts</button>
+          <button onClick={submit} className="btn btn-block btn-primary">Create</button>
+          <br />
+          <Link to="/ideas">
+            <button className="btn btn-block btn-primary">Browse</button>
+          </Link>
           <br />
           <div className="pull-left"><Link to="/register">Register</Link></div>
           <div className="pull-right"><Link to="/register">Login</Link></div>
         </div>
         <div id="loaderModal" style={{ display: 'none' }}>
-          <div className="loader" style={{ margin: 'auto' }}/>
+          <div className="loader" style={{ margin: 'auto' }} />
         </div>
       </div>
     );

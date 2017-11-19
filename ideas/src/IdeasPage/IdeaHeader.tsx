@@ -26,11 +26,21 @@ class IdeaHeader extends React.Component<Props, {}> {
 
         <div id="naviBox">
           <Link to="/"><span className="glyphicon glyphicon-plus pull-left" /></Link>
-          <Link to="/"><span className="glyphicon glyphicon-cog pull-right" /></Link>
+          <Link to={'/user/' + localStorage.getItem('uid')}>
+            <span className="glyphicon glyphicon-cog pull-right" />
+          </Link>
         </div>
         <br />
         <h1 className="text-center">Ideas</h1>
-        <select multiple className="text-center" size={1} name="status" id="status" onChange={this.handleChange} value={this.props.status} >
+        <select
+          multiple={true}
+          className="text-center"
+          size={1}
+          name="status"
+          id="status"
+          onChange={this.handleChange}
+          value={this.props.status}
+        >
           <option className="btn btn-success" value="idea">Idea</option>
           <option className="btn btn-success" value="problem">Problem</option>
           <option className="btn btn-success" value="doing">Doing</option>

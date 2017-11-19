@@ -1,3 +1,5 @@
+import Idea from './Idea';
+import Comment from './Comment';
 class User {
   /* tslint:disable */
   id: number;
@@ -9,6 +11,8 @@ class User {
   email: string;
   created_at: Date;
   updated_at: Date;
+  comments: Comment[];
+  ideas: Idea[];
   /* tslint:enable */
 }
 
