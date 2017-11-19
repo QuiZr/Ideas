@@ -21,7 +21,6 @@ class IdeaHeader extends React.Component<Props, {}> {
   }
 
   render() {
-    console.log(this.state);
     return (
       <div className="container-fluid wrapper">
 
