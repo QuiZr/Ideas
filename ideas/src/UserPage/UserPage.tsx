@@ -14,6 +14,7 @@ class UserPage extends React.Component<{}, State> {
 
     this.logout = this.logout.bind(this);
     this.randomInt = this.randomInt.bind(this);
+    this.asdf = this.asdf.bind(this);
 
     this.state = { data: null };
 
@@ -38,11 +39,44 @@ class UserPage extends React.Component<{}, State> {
     return Math.round(Math.random() * 7);
   }
 
+  asdf() {
+    if (!this.state.data) {
+      return;
+    }
+    let ideas = this.state.data.ideas;
+    let b = [];
+
+    for (let f of ideas) {
+      if (ideas.indexOf(f) < ideas.length - 2) {
+        b.push(
+          <div className="row text-center">
+            <Link to={'/idea/' + f.id}>
+              <div className="col-md-6">
+                <button className="btn btn-default ideaLink">
+                  Solution <br />
+                  <b>{f.title}</b>
+                </button>
+              </div>
+            </Link>
+            <div className="col-md-6">
+            <Link to={'/idea/' + ideas[ideas.indexOf(f) + 1].id}>
+              <button className="btn btn-default ideaLink">
+                Solution <br />
+                <b>{ideas[ideas.indexOf(f) + 1].title}</b>
+              </button>
+            </Link>                          
+            </div>
+          </div>
+        );
+      }
+    }
+    return b;
+  }
+
   render() {
     if (!this.state.data) {
       return null;
     }
-    console.log(this.state.data);
     return (
       <div>
         <div className="container-fluid wrapper">
@@ -80,63 +114,22 @@ class UserPage extends React.Component<{}, State> {
 							</div>
             </div>
             <div id="activity" className="col-md-8" >
-              <div className="row text-center">
-                <div className="col-md-6">
-                  <button className="btn btn-default ideaLink">
-                    Rozwiązanie <br />
-                    <b>Ut ultricies dictum ante non elementum.</b>
-                  </button>
-                </div>
-                <div className="col-md-6">
-                  <button className="btn btn-default ideaLink">
-                    Rozwiązanie <br />
-                    <b>Ut ultricies dictum ante non elementum.</b>
-                  </button>
-                </div>
-              </div>
-              <div className="row text-center">
-                <div className="col-md-6 text-center">
-                  <button className="btn btn-default ideaLink">
-                    Rozwiązanie <br />
-                    <b>Ut ultricies dictum ante non elementum.</b>
-                  </button>
-                </div>
-                <div className="col-md-6 text-center">
-                  <button className="btn btn-default ideaLink">
-                    Rozwiązanie <br />
-                    <b>Ut ultricies dictum ante non elementum.</b>
-                  </button>
-                </div>
-              </div>
-              <div className="row text-center">
-                <div className="col-md-6 text-center">
-                  <button className="btn btn-default ideaLink">
-                    Rozwiązanie <br />
-                    <b>Ut ultricies dictum ante non elementum.</b>
-                  </button>
-                </div>
-                <div className="col-md-6 text-center">
-                  <button className="btn btn-default ideaLink">
-                    Rozwiązanie <br />
-                    <b>Ut ultricies dictum ante non elementum.</b>
-                  </button>
-                </div>
-              </div>
+              {this.asdf()}
               <hr />
               <div>
                 <h4>Ostatnia aktywność</h4>
                 {this.state.data.comments.map((comment) => (
-                  <div className="text-center">
-                    <button className="btn btn-default activityLink">
-                      <span className="pull-left">
-                        Commented <Link to="#">
-                          <b>{comment.created_at}</b>
-                        </Link>
-                      </span>
-                      <br />
-                      <span className="pull-left"><i>{comment.body + Array(200).join(' ')}</i></span>
-                    </button>
-                  </div>)
+                  <Link to={'/idea/' + comment.idea_id}>
+                    <div className="text-center">
+                      <button className="btn btn-default activityLink">
+                        <span className="pull-left">
+                          Commented on <b>{comment.created_at}</b>
+                        </span>
+                        <br />
+                        <span className="pull-left"><i>{comment.body + Array(200).join(' ')}</i></span>
+                      </button>
+                    </div>
+                  </Link>)
                 )}
               </div>
             </div>

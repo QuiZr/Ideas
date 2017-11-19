@@ -23,7 +23,9 @@ class LandingPage extends React.Component {
           </div>
           <br />
           <br />
-          <button onClick={submit} className="btn btn-block btn-primary">Create</button>
+          <Link to="/add">
+            <button onClick={submit} className="btn btn-block btn-primary">Create</button>
+          </Link>
           <br />
           <Link to="/ideas">
             <button className="btn btn-block btn-primary">Browse</button>

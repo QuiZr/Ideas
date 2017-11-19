@@ -24,13 +24,13 @@ class UserListPage extends React.Component<{}, State> {
       method: 'get',
       headers: headers
     }).then((r) => r.json())
-      .then((r: User[]) => this.setState({ data: r }, () => console.log(this.state)));
+      .then((r: User[]) => this.setState({ data: r }));
 
     fetch('http://' + process.env.REACT_APP_API_HOST + ':3000/tags', {
       method: 'get',
       headers: headers
     }).then((r) => r.json())
-      .then((r: Tag[]) => this.setState({ tags: r }, () => console.log(this.state)));
+      .then((r: Tag[]) => this.setState({ tags: r }));
   }
 
   render() {
@@ -39,24 +39,49 @@ class UserListPage extends React.Component<{}, State> {
     }
     return (
       <div>
-        <ul>
-          {this.state.tags.map((tag) => (
-            <li key={tag.id}>
-              <Link to={'/ideas'} onClick={() => localStorage.setItem('tags', tag.title)}>
-                #{tag.title}
-              </Link>
-            </li>
-          ))}
-        </ul>
-        <ul>
-          {this.state.data.map((user) => (
-            <li key={user.id}>
-              <Link to={'/user/' + user.id}>
-                {user.email}
-              </Link>
-            </li>
-          ))}
-        </ul>
+        <div className="container-fluid wrapper">
+          <div id="naviBox">
+            <Link to="/ideas">
+              <span className="glyphicon glyphicon-home pull-left" />
+            </Link>
+            <Link to="/">
+              <span className="glyphicon glyphicon-cog pull-right" />
+            </Link>
+          </div>
+          <br />
+          <h1 className="text-center">Ideas</h1>
+          <select name="tags" id="tags" multiple={true}>
+            {this.state.tags.map((tag) => (
+                <option key={tag.id} value={tag.id}>
+                  {tag.title}
+                </option>
+              ))}
+          </select>
+          <table className="table">
+            <thead>
+              <tr>
+                <th>User</th>
+                <th>Email</th>
+                <th>Ideas</th>
+                <th>Solutions</th>
+                <th>Comments</th>
+                <th />
+              </tr>
+            </thead>
+            <tbody>
+              {this.state.data.map((user) => (
+                <tr key={user.id}>
+                  <td>{user.email}</td>
+                  <td>{user.email}</td>
+                  <td>{user.ideas.length}</td>
+                  <td>{Math.round(Math.random() * 7)}</td>
+                  <td>{user.comments.length}</td>
+                  <td><Link to={'/user/' + user.id}>Send message</Link></td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     );
   }
