@@ -11,11 +11,11 @@ class IdeaRow extends React.Component<{ idea: Idea }, {}> {
       <div className="record">
         <h3>{idea.title}</h3>
         <p>{idea.desc_short}</p>
-        <button className="btn btn-default">
-          <Link to={'/idea/' + idea.id}>
+        <Link to={'/idea/' + idea.id}>
+          <button className="btn btn-default">
             Read more...
+          </button>
         </Link>
-        </button>
       </div>
     );
   }
