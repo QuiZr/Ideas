@@ -36,7 +36,7 @@ class IdeaPage extends React.Component<{}, { data: Idea | null }> {
 
     return (
       <div>
-        <div className="container-fluid">
+        <div className="container-fluid wrapper">
           <div id="naviBox">
             <Link to="/ideas"><span className="glyphicon glyphicon-home pull-left" /></Link>
             <Link to="/"><span className="glyphicon glyphicon-cog pull-right" /></Link>
