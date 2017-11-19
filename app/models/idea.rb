@@ -24,6 +24,7 @@ class Idea < ApplicationRecord
   scope :status, -> (status) { where status: status }
   scope :tag, -> (tag) { joins(:tags).where('tags.title = ?', tag) }
   scope :title, -> (title) { where('title like ?', "%#{title}%") }
+  scope :author, -> (author) { where user_id: author }
 
   def likes
     Like.where(idea_id: self.id).count

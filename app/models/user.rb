@@ -37,6 +37,9 @@ class User < ActiveRecord::Base
   include DeviseTokenAuth::Concerns::User
   include Filterable
 
+  has_many :comments
+  has_many :ideas
+
   scope :address, -> (address) { where('email like ?', "%#{address}%") }
 
   def skip

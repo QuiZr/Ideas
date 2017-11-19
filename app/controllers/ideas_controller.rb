@@ -4,7 +4,7 @@ class IdeasController < ApplicationController
 
   # GET /ideas
   def index
-    @ideas = Idea.filter(params.slice(:status, :tag, :title))
+    @ideas = Idea.filter(params.slice(:status, :tag, :title, :author))
     json_response(@ideas)
   end
 
